@@ -14,11 +14,14 @@ cam_addresses = [
 #"rtsp://192.168.1.128:8183/h264_pcm.sdp"
 #"https://192.168.1.128:8183/onvif/device_service"
 
-# Wyze version of RTSP
-"rtsp://10.0.0.7/live",
+# # Wyze version of RTSP
+# "rtsp://10.0.0.7/live",
 
-# DroidCam
-"http://10.0.0.4:4747/video"]
+# # DroidCam
+# "http://10.0.0.4:4747/video",
+
+# Webcam
+2]
 
 
 # No Signal and No Camera Case
