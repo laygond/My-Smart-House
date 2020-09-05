@@ -5,10 +5,11 @@
  * Modified by Bryan Laygond
  * 
  * DEVICE PARAMETER SET-UP:
- * The MQTT Door Sensor connects automatically to network and MQTT server
- * if a configuration file is provided, otherwise it allows for a manual
- * wireless configuration by connecting to the device's WiFi SSID: access
- * to configuration panel via web browser at 192.168.4.1
+ * The MQTT Door Sensor connects automatically to your local network and
+ * MQTT server if a configuration file is provided. If file not provided,
+ * it allows for a manual wireless web configuration: search the device's
+ * WiFi SSID (from phone, laptop, etc) and then fill the configuration
+ * panel via web browser at 192.168.4.1
  * 
  * REMOTE ACCESS:
  * Once connected to your network you can access your device by going to
@@ -16,24 +17,24 @@
  * firmware can be done remotely(manually) at http://YOUR_DEVICE_IP/firmware 
  * 
  * HARDWARE:
- * MK-DoorSensor https://www.MK-SmartHouse.com/door-sensor
+ * ESP8266 connected as MK-DoorSensor https://www.MK-SmartHouse.com/door-sensor
  *    
  * PREREQUISITES:
  * In Arduino IDE Install the following:
  * Under 'Sketch/Include Library/Manage Libraries'
  * - ArduinoJson by Benoit Blanchon   Version 5.13.5 (V5 is a must)
- * - MQTT        by Joel Gaehwiler    Version 2.4.7   1.11.0
+ * - MQTT        by Joel Gaehwiler    Version 2.4.7
  * - WiFiManager by tzapu             Version 2.0.3  
  * 
  * Under 'File/Preferences/Additional Board Manage URL' include
  * - http://arduino.esp8266.com/stable/package_esp8266com_index.json
  * 
  * Under 'Tools/Boards/Board Manager'
- * - esp8266     by ESP8266 Community Version 2.5.1   2.3.0
+ * - esp8266     by ESP8266 Community Version 2.5.0
  * 
  **/
 
-/* ---------- DO NOT EDIT ANYTHING IN THIS FILE UNLESS YOU KNOW WHAT YOU ARE DOING---------- */
+
 #include <FS.h>                   //this needs to be first, or it all crashes and burns...
 //#include <Servo.h> 
 #include <ESP8266WiFi.h>          //https://github.com/esp8266/Arduino
