@@ -31,7 +31,7 @@
 const char* ssid = "wifissid";
 
 // Password to wifi network
-const char* password = "wifpassword"; 
+const char* password = "wifipassword"; 
 
 
 /* ==== Web Updater Settings ==== */
