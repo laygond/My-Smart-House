@@ -32,6 +32,8 @@
  * Under 'Tools/Boards/Board Manager'
  * - esp8266     by ESP8266 Community Version 2.5.0
  * 
+ * In hardware set the jumper pins to PGM for program
+ * 
  **/
 
 
