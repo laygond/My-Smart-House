@@ -4,7 +4,7 @@
  * Inspired by Matt Kaczynski http://www.MK-SmartHouse.com
  * Modified by Bryan Laygond
  * 
- * DEVICE PARAMETER SET-UP:
+ * NETWORK AND SERVER SET-UP:
  * The MQTT Door Sensor connects automatically to your local network and
  * MQTT server if a configuration file is provided. If file not provided,
  * it allows for a manual wireless web configuration: search the device's
@@ -17,7 +17,7 @@
  * firmware can be done remotely(manually) at http://YOUR_DEVICE_IP/firmware 
  * 
  * HARDWARE:
- * ESP8266 connected as MK-DoorSensor https://www.MK-SmartHouse.com/door-sensor
+ * ESP8266 ESP-12E connected as MK-DoorSensor https://www.MK-SmartHouse.com/door-sensor
  *    
  * PREREQUISITES:
  * In Arduino IDE Install the following:
@@ -32,7 +32,15 @@
  * Under 'Tools/Boards/Board Manager'
  * - esp8266     by ESP8266 Community Version 2.5.0
  * 
- * In hardware set the jumper pins to PGM for program
+ * UPLOAD SET-UP:
+ * In the physical hardware set the jumper pins to PGM for program
+ * once upload is completed set jumper pins back to RUN
+ * In Arduino IDE set: 
+ *    Board: "Generic ESP8266 Module"
+ *    Upload Speed: "115200" (or lower)
+ *    Flash Size: "IM (64K SPIFFS)" (or lower)
+ *    Flash Mode "DIO" (since ESP-12E)
+ *    Reset Method: "nodemcu" (since ESP-12E)
  * 
  **/
 
