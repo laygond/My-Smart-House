@@ -15,3 +15,4 @@ House Automation through OpenHab2
 ### Load Code to IoT Devices
 [Install Arduino in Linux](https://www.arduino.cc/en/guide/linux)
 [Add ESP8266 to Arduino Board Manager](https://randomnerdtutorials.com/how-to-install-esp8266-board-arduino-ide/)
+[Discussion of QIO DIO QOUT DOUT flash modes](https://www.esp32.com/viewtopic.php?t=1250)
