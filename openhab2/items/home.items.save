@@ -1,0 +1,9 @@
+/**
+* Item Syntax
+* itemtype itemname "labeltext [stateformat]" <iconname> (group1, group2, ...) ["tag1", "tag2", ...] {bindingconfig}
+**/
+
+//Security items
+Switch SecuritySystem "Security System" 
+Contact Puerta1 "Puerta 1 [%s]" <door> {="<[broker:casa/security/puerta1:state:default]" }
+

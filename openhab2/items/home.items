@@ -1,0 +1,21 @@
+
+/**
+* Item Syntax
+* itemtype itemname "labeltext [stateformat]" <iconname> (group1, group2, ...) ["tag1", "tag2", ...] {bindingconfig}
+**/
+
+//Security items
+Switch  SecuritySystem  "Security System" 
+Contact Puerta1         "Puerta 1 [%s]"  <door>	 	{channel="mqtt:topic:CasaDevice1:puerta1_ch" }
+Contact Puerta2         "Puerta 2 [%s]"  <door>  	{channel="mqtt:topic:CasaDevice2:puerta2_ch" }
+
+//Fire Safety items
+String  FireKitchen     "Kitchen [%s]"	 <fire> 	{channel="mqtt:topic:CasaDevice9:firekitchen_ch"}
+
+//B LED items
+Group 	BLEDGroup 	"B LED" 			(All)
+Color 	BLEDColor	"B LED Color" 	 <colorpicker>  (BLEDGroup) [ "Lighting" ]
+String 	BLEDColorStr 	"B LED ColorStr"		(BLEDGroup) {channel="mqtt:topic:CasaDevice8:bled_colorstr_ch"}
+Dimmer 	BLEDSpeed 	"B LED Speed"	 <time> 	(BLEDGroup) {channel="mqtt:topic:CasaDevice8:bled_speed_ch", autoupdate="false"}
+String 	BLEDEffect 	"B LED Effects"	 <rgb> 		(BLEDGroup) {channel="mqtt:topic:CasaDevice8:bled_effect_ch", autoupdate="false"}
+

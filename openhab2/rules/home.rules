@@ -1,0 +1,77 @@
+//------ VARIABLES -------
+//B LED Controller
+var HSBType hsbValue
+var int redValue
+var int greenValue
+var int blueValue
+var String RGBvalues
+
+//B LED Stored State
+var HSBType storedColor
+var String storedEffect
+var HSBType red  = new HSBType("359,100,100")
+var HSBType gray = new HSBType("0,0,59")
+
+
+//-------- RULES -----------
+//Puertas
+rule "Puerta 1 or 2 is OPEN"
+when
+      Item Puerta1 received update OPEN or Item Puerta2 received update OPEN  
+then
+   //LED Notification
+      // Save current LED state
+      if(BLEDColor.state  === null) { BLEDColor.sendCommand("0,0,0") } //LED Controller takes care of RGB conversion      
+      if(BLEDEffect.state === null) { BLEDEffect.sendCommand("NONE") }
+      if(BLEDEffect.state == "NONE"){ storedColor = BLEDColor.state as HSBType }
+      storedEffect = BLEDEffect.state //!!!!!!!!!!!!!!!!!storing effect not working
+      // Add Notification Color or Effect Here
+      BLEDEffect.sendCommand("POLICE") 
+      // Return to previous color or effect
+      createTimer(now.plusSeconds(5), [ |  
+//IDEA: if door remains open then display fix color if closed return to stored effect/color
+//          if(storedEffect == "NONE")
+//	  {
+// 	       BLEDColor.sendCommand(storedColor)
+//	  }
+//	  else
+//	  {
+//             BLEDEffect.sendCommand("NONE")
+//		// BLEDEffect.sendCommand(storedEffect)
+//	  }     	
+          BLEDEffect.sendCommand("NONE")
+          BLEDColor.sendCommand(storedColor)
+
+      ])
+      
+   //App Notification 
+      if(SecuritySystem.state == ON)
+      {
+      	  sendBroadcastNotification("SECURITY SYSTEM: Puerta OPEN")
+      }
+end
+
+//Fire Safety
+rule "Fire Detectors Activate"
+when
+      Item FireKitchen received update
+then
+      if(FireKitchen.state == "FIRE DETECTED!")
+      {
+          sendBroadcastNotification("FIRE SYSTEM: KITCHEN FIRE ACTIVATED")
+      }
+end
+
+// LED Controller
+rule "B LED Controller: Color,Speed,Effect"
+when
+      Item BLEDColor changed // then read color and send it through BLEDColorStr
+then
+      hsbValue   = BLEDColor.state as HSBType
+      redValue   = hsbValue.red.intValue
+      greenValue = hsbValue.green.intValue
+      blueValue  = hsbValue.blue.intValue
+      RGBvalues  = redValue.toString + ";" + greenValue.toString + ";" + blueValue.toString + ";"
+      sendCommand(BLEDColorStr, RGBvalues)
+      logInfo("BLEDColor", RGBvalues )
+end

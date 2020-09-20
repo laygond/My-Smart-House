@@ -1,0 +1,24 @@
+// Use item names defined at /etc/openhab2/items/home.items
+ 
+sitemap home label="Laygond-AI"
+{
+    Frame label="Security"
+    {
+        Switch item=SecuritySystem
+        Text   item=Puerta1
+	Text   item=Puerta2
+    }
+
+    Frame label="B-Room"
+    {
+	Colorpicker item=BLEDColor
+	Selection   item=BLEDEffect mappings=["NONE"="NONE", "FADE"="FADE", "POLICE"="POLICE", "COLD"="COLD", "WARM"="WARM", "BREATH"="BREATH", "RAINBOW"="RAINBOW"]
+	Slider 	    item=BLEDSpeed
+    }
+
+    Frame label="Fire Safety"
+    {
+        Text item=FireKitchen
+    }
+}
+
