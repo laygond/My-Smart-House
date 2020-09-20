@@ -114,7 +114,7 @@ void setup()
   for (size_t i = 0; i < sizeof(relays) / sizeof(int); i++)
   {  
     pinMode(relays[i], OUTPUT);
-    digitalWrite(relays[i], deviceStates[i] ? HIGH : LOW);
+    digitalWrite(relays[i], relayStates[i] ? HIGH : LOW);
   }
   
   WiFi.mode(WIFI_STA);
