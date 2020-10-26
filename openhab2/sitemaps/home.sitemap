@@ -18,7 +18,8 @@ sitemap home label="Laygond-AI"
 
     Frame label="Fire Safety"
     {
-        Text item=FireKitchen
+        Text   item=FireKitchen
+        Switch item=Plancha
     }
 }
 

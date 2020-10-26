@@ -11,6 +11,7 @@ Contact Puerta2         "Puerta 2 [%s]"  <door>  	{channel="mqtt:topic:CasaDevic
 
 //Fire Safety items
 String  FireKitchen     "Kitchen [%s]"	 <fire> 	{channel="mqtt:topic:CasaDevice9:firekitchen_ch"}
+Switch  Plancha         "Plancha [%s]"   <wardrobe> {channel="mqtt:topic:CasaDevice10:plancha_ch"}
 
 //B LED items
 Group 	BLEDGroup 	"B LED" 			(All)

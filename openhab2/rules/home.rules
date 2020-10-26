@@ -62,6 +62,15 @@ then
       }
 end
 
+rule "Plancha"
+when
+      Item Plancha received update ON
+then
+      createTimer(now.plusSeconds(5), [ |
+            Plancha.sendCommand(OFF)
+      ])
+end
+
 // LED Controller
 rule "B LED Controller: Color,Speed,Effect"
 when

@@ -26,5 +26,10 @@ Bridge mqtt:systemBroker:embedded-mqtt-broker [ host="192.168.1.11", secure=fals
 	Type dimmer : bled_speed_ch    "B LED Speed"  [ stateTopic="casa/b-realm/light/led/state/speed" , commandTopic="casa/b-realm/light/led" ]
 	Type string : bled_effect_ch   "B LED Effect" [ stateTopic="casa/b-realm/light/led/state/effect", commandTopic="casa/b-realm/light/led" ]
     }
+
+    Thing mqtt:topic:CasaDevice10 "Plancha" {
+    Channels:
+        Type switch : plancha_ch "Plancha" [ stateTopic="casa/fire/plancha/stat/POWER" , commandTopic="casa/fire/plancha/cmnd/POWER" ]
+    }
 }
 
