@@ -16,12 +16,21 @@ cam_addresses = [
 
 # # Wyze version of RTSP
 # "rtsp://10.0.0.7/live",
+#"rtsp://admin:____@192.168.1.12/live",
 
 # # DroidCam
 # "http://10.0.0.4:4747/video",
 
+# # MotionEyeOS
+"http://10.0.0.10:8081",
+
+# # EZVIZ
+# rtsp://admin:verification_code(located on camera sticker)@IP:554/H.264
+"rtsp://admin:_____@192.168.1.13:554/H.264",
+
 # Webcam
-2]
+0
+]
 
 
 # No Signal and No Camera Case
@@ -61,16 +70,16 @@ while(True):
         monitor = np.hstack((frames[0],frames[1]))
     
     elif len(frames) > 2:
-        monitor_col = round(len(frames)/2)
         if len(frames) % 2 == 1:
             frames.append(no_camera)
-        monitor_top_row = frames[0]
-        monitor_bottom_row = frames[monitor_col]
-        for i in range(1,monitor_col):
-            monitor_top_row = np.hstack((monitor_top_row,frames[i]))
-        for i in range(1,monitor_col):
-            monitor_bottom_row = np.hstack((monitor_bottom_row,frames[i+monitor_col]))
-        monitor = np.vstack((monitor_top_row, monitor_bottom_row))
+        half_n_frames = len(frames)/2
+        monitor_row_1 = frames[0]
+        monitor_row_2 = frames[half_n_frames]
+        for i in range(1,half_n_frames):
+            monitor_row_1 = np.hstack((monitor_row_1,frames[i]))
+        for i in range(half_n_frames+1,len(frames)):
+            monitor_row_2 = np.hstack((monitor_row_2,frames[i]))
+        monitor = np.vstack((monitor_row_1, monitor_row_2))
     
     cv2.imshow("Monitor", monitor)
     if cv2.waitKey(1) & 0xFF == ord('q'):
