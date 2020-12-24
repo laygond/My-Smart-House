@@ -20,6 +20,8 @@ when
       Item Puerta1 received update OPEN or Item Puerta2 received update OPEN  
 then
    //LED Notification
+      Mything_item.sendCommand("Door")
+
       // Save current LED state
       if(BLEDColor.state  === null) { BLEDColor.sendCommand("0,0,0") } //LED Controller takes care of RGB conversion      
       if(BLEDEffect.state === null) { BLEDEffect.sendCommand("NONE") }
@@ -66,6 +68,7 @@ rule "Plancha"
 when
       Item Plancha received update ON
 then
+      Mything_item.sendCommand("Planchita")
       createTimer(now.plusSeconds(5), [ |
             Plancha.sendCommand(OFF)
       ])
