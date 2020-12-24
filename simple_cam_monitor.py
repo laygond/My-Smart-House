@@ -17,16 +17,18 @@ cam_addresses = [
 # # Wyze version of RTSP
 # "rtsp://10.0.0.7/live",
 #"rtsp://admin:____@192.168.1.12/live",
+"rtsp://admin:ZECP1@192.168.68.64/live",
 
 # # DroidCam
 # "http://10.0.0.4:4747/video",
 
 # # MotionEyeOS
-"http://10.0.0.10:8081",
+"http://10.0.0.8:8081",
 
 # # EZVIZ
 # rtsp://admin:verification_code(located on camera sticker)@IP:554/H.264
-"rtsp://admin:_____@192.168.1.13:554/H.264",
+#"rtsp://admin:_____@192.168.1.13:554/H.264",
+
 
 # Webcam
 0
@@ -72,7 +74,7 @@ while(True):
     elif len(frames) > 2:
         if len(frames) % 2 == 1:
             frames.append(no_camera)
-        half_n_frames = len(frames)/2
+        half_n_frames = int(len(frames)/2)
         monitor_row_1 = frames[0]
         monitor_row_2 = frames[half_n_frames]
         for i in range(1,half_n_frames):
