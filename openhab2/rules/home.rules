@@ -14,53 +14,29 @@ var HSBType gray = new HSBType("0,0,59")
 
 
 //-------- RULES -----------
-//Puertas
+//=== SECURITY
 rule "Puerta 1 or 2 is OPEN"
 when
       Item Puerta1 received update OPEN or Item Puerta2 received update OPEN  
 then
-   //LED Notification
-      Mything_item.sendCommand("Door")
-
-      // Save current LED state
-      if(BLEDColor.state  === null) { BLEDColor.sendCommand("0,0,0") } //LED Controller takes care of RGB conversion      
-      if(BLEDEffect.state === null) { BLEDEffect.sendCommand("NONE") }
-      if(BLEDEffect.state == "NONE"){ storedColor = BLEDColor.state as HSBType }
-      storedEffect = BLEDEffect.state //!!!!!!!!!!!!!!!!!storing effect not working
-      // Add Notification Color or Effect Here
-      BLEDEffect.sendCommand("POLICE") 
-      // Return to previous color or effect
-      createTimer(now.plusSeconds(5), [ |  
-//IDEA: if door remains open then display fix color if closed return to stored effect/color
-//          if(storedEffect == "NONE")
-//	  {
-// 	       BLEDColor.sendCommand(storedColor)
-//	  }
-//	  else
-//	  {
-//             BLEDEffect.sendCommand("NONE")
-//		// BLEDEffect.sendCommand(storedEffect)
-//	  }     	
-          BLEDEffect.sendCommand("NONE")
-          BLEDColor.sendCommand(storedColor)
-
-      ])
+      BLEDColor.sendCommand("0,0,0")  //LED Controller takes care of HSB to string conversiona
+      TabletDisplay.sendCommand("ON") //OFF is taken care by the tablet built-in app (sleep mode in 10 minutes)
       
-   //App Notification 
       if(SecuritySystem.state == ON)
       {
-      	  sendBroadcastNotification("SECURITY SYSTEM: Puerta OPEN")
+      	sendBroadcastNotification("SECURITY SYSTEM: Puerta OPEN")
       }
 end
 
-//Fire Safety
+//=== FIRE SAFETY
 rule "Fire Detectors Activate"
 when
       Item FireKitchen received update
 then
       if(FireKitchen.state == "FIRE DETECTED!")
       {
-          sendBroadcastNotification("FIRE SYSTEM: KITCHEN FIRE ACTIVATED")
+            BLEDColor.sendCommand("0,0,0")
+            sendBroadcastNotification("FIRE SYSTEM: KITCHEN FIRE ACTIVATED")
       }
 end
 
@@ -68,13 +44,12 @@ rule "Plancha"
 when
       Item Plancha received update ON
 then
-      Mything_item.sendCommand("Planchita")
       createTimer(now.plusSeconds(5), [ |
             Plancha.sendCommand(OFF)
       ])
 end
 
-// LED Controller
+//=== HELPER FUNCTIONS
 rule "B LED Controller: Color,Speed,Effect"
 when
       Item BLEDColor changed // then read color and send it through BLEDColorStr

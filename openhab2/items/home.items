@@ -8,6 +8,7 @@
 Switch  SecuritySystem  "Security System" 
 Contact Puerta1         "Puerta 1 [%s]"  <door>	 	{channel="mqtt:topic:CasaDevice1:puerta1_ch" }
 Contact Puerta2         "Puerta 2 [%s]"  <door>  	{channel="mqtt:topic:CasaDevice2:puerta2_ch" }
+String  TabletDisplay   "Tablet Display" 	        {channel="mqtt:topic:CasaDevice111:tablet_display_ch"}
 
 //Fire Safety items
 String  FireKitchen     "Kitchen [%s]"	 <fire> 	{channel="mqtt:topic:CasaDevice9:firekitchen_ch"}

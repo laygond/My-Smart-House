@@ -7,17 +7,17 @@ Bridge mqtt:systemBroker:embedded-mqtt-broker [ host="192.168.1.11", secure=fals
 
     Thing mqtt:topic:CasaDevice1 "Puerta 1" {
     Channels:
-        Type contact : puerta1_ch "Puerta 1" [ stateTopic="casa/security/puerta1" ]
+    Type contact : puerta1_ch "Puerta 1" [ stateTopic="casa/security/puerta1" ]
     }
     
     Thing mqtt:topic:CasaDevice2 "Puerta 2" {
     Channels:
-        Type contact : puerta2_ch "Puerta 2" [ stateTopic="casa/security/puerta2" ]
+    Type contact : puerta2_ch "Puerta 2" [ stateTopic="casa/security/puerta2" ]
     }
 
     Thing mqtt:topic:CasaDevice9 "Fire Kitchen" {
     Channels:
-        Type string : firekitchen_ch "Fire Kitchen" [ stateTopic="casa/fire/kitchen" ]
+    Type string : firekitchen_ch "Fire Kitchen" [ stateTopic="casa/fire/kitchen" ]
     }
 
     Thing mqtt:topic:CasaDevice8 "B LED" {
@@ -29,7 +29,12 @@ Bridge mqtt:systemBroker:embedded-mqtt-broker [ host="192.168.1.11", secure=fals
 
     Thing mqtt:topic:CasaDevice10 "Plancha" {
     Channels:
-        Type switch : plancha_ch "Plancha" [ stateTopic="casa/fire/plancha/stat/POWER" , commandTopic="casa/fire/plancha/cmnd/POWER" ]
+    Type switch : plancha_ch "Plancha" [ stateTopic="casa/fire/plancha/stat/POWER" , commandTopic="casa/fire/plancha/cmnd/POWER" ]
+    }
+
+    Thing mqtt:topic:CasaDevice111 "Tablet Display" {
+    Channels:
+	Type string : tablet_display_ch "Tablet Display" [ commandTopic="casa/security/tablet/display" ]
     }
 }
 

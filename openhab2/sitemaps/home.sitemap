@@ -6,7 +6,7 @@ sitemap home label="Laygond-AI"
     {
         Switch item=SecuritySystem
         Text   item=Puerta1
-	Text   item=Puerta2
+        Text   item=Puerta2
     }
 
     Frame label="B-Room"
