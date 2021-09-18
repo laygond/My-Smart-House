@@ -15,9 +15,18 @@ String  FireKitchen     "Kitchen [%s]"	 <fire> 	{channel="mqtt:topic:CasaDevice9
 Switch  Plancha         "Plancha [%s]"   <wardrobe> {channel="mqtt:topic:CasaDevice10:plancha_ch"}
 
 //B LED items
-Group 	BLEDGroup 	"B LED" 			(All)
-Color 	BLEDColor	"B LED Color" 	 <colorpicker>  (BLEDGroup) [ "Lighting" ]
-String 	BLEDColorStr 	"B LED ColorStr"		(BLEDGroup) {channel="mqtt:topic:CasaDevice8:bled_colorstr_ch"}
-Dimmer 	BLEDSpeed 	"B LED Speed"	 <time> 	(BLEDGroup) {channel="mqtt:topic:CasaDevice8:bled_speed_ch", autoupdate="false"}
-String 	BLEDEffect 	"B LED Effects"	 <rgb> 		(BLEDGroup) {channel="mqtt:topic:CasaDevice8:bled_effect_ch", autoupdate="false"}
+Group 	BLED	 	"B LED"		 <colorpicker>	
+Color 	BLEDColor	"B LED Color" 	 <colorpicker>  (BLED) [ "Lighting" ]
+String 	BLEDColorStr 	"B LED ColorStr"		(BLED) {channel="mqtt:topic:CasaDevice8:bled_colorstr_ch"}
+Dimmer 	BLEDSpeed 	"B LED Speed"	 <time> 	(BLED) {channel="mqtt:topic:CasaDevice8:bled_speed_ch", autoupdate="false"}
+String 	BLEDEffect 	"B LED Effects"	 <rgb> 		(BLED) {channel="mqtt:topic:CasaDevice8:bled_effect_ch", autoupdate="false"}
+
+//Aire B items
+//TODO: String AireB "Aire [%s]" <climate>  //Through rules: update icon based on AireBPower and value (not label) through AireBTemp value. In sitemap juts make it Text. 
+Group:Switch:OR(ON,OFF) AireB "Aire"    <climate>	
+Switch  AirePower	"Power"		<climate>	(AireB)
+Number 	AireBTemp	"Temp [%.1f °C]"<temperature>	
+String 	AireBFanSpeed 	"Fan Speed" 	<fan>		
+String 	AireBMode 	"Mode"	 	<flow> 	 	  
+
 
