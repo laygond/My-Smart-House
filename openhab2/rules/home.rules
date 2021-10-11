@@ -28,6 +28,23 @@ then
       }
 end
 
+
+//=== MAIL
+rule "You Got Mail"
+when
+      Item Buzon changed from OFF to ON
+then
+      //BLEDColor.sendCommand("0,0,0")
+end
+
+rule "Mail Reset"
+when
+      Item Buzon received command OFF
+then
+      //BLEDColor.sendCommand("0,0,0")
+end
+
+
 //=== FIRE SAFETY
 rule "Fire Detectors Activate"
 when

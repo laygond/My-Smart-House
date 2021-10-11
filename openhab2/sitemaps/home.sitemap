@@ -8,6 +8,11 @@ sitemap home label="Laygond-AI"
         Text   item=Puerta1
         Text   item=Puerta2
     }
+    
+    Frame label="Mail"
+    {
+        Switch item=Buzon
+    }
 
     Frame label="B-Room"
     {
