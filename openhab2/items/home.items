@@ -12,7 +12,10 @@ String  TabletDisplay   "Tablet Display" 	        {channel="mqtt:topic:CasaDevic
 
 //Fire Safety items
 String  FireKitchen     "Kitchen [%s]"	 <fire> 	{channel="mqtt:topic:CasaDevice9:firekitchen_ch"}
-Switch  Plancha         "Plancha [%s]"   <wardrobe> {channel="mqtt:topic:CasaDevice10:plancha_ch"}
+Switch  Plancha         "Plancha [%s]"   <wardrobe>     {channel="mqtt:topic:CasaDevice10:plancha_ch"}
+
+//Mail items
+Switch  Buzon  		"Buzon"		 <party> 	{channel="mqtt:topic:CasaDevice12:mail_ch" }
 
 //B LED items
 Group 	BLED	 	"B LED"		 <colorpicker>	

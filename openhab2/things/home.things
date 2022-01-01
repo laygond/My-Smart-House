@@ -15,6 +15,11 @@ Bridge mqtt:systemBroker:embedded-mqtt-broker [ host="192.168.1.11", secure=fals
     Type contact : puerta2_ch "Puerta 2" [ stateTopic="casa/security/puerta2" ]
     }
 
+    Thing mqtt:topic:CasaDevice12 "Mail" {
+    Channels:
+    Type switch : mail_ch "Buzon" [ stateTopic="casa/mail/buzon" ]
+    }
+    
     Thing mqtt:topic:CasaDevice9 "Fire Kitchen" {
     Channels:
     Type string : firekitchen_ch "Fire Kitchen" [ stateTopic="casa/fire/kitchen" ]
