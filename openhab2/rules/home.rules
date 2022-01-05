@@ -19,7 +19,7 @@ rule "Puerta 1 or 2 is OPEN"
 when
       Item Puerta1 received update OPEN or Item Puerta2 received update OPEN  
 then
-      BLEDMsgToSend.sendCommand("1S1")  //String arrives in this format 1S6 = ON section 6, 0S6 = OFF section 6
+      BLEDMsgToSend.sendCommand("1S0")  //String arrives in this format 1S6 = ON section 6, 0S6 = OFF section 6
       TabletDisplay.sendCommand("ON") //OFF is taken care by the tablet built-in app (sleep mode in 10 minutes)
       
       if(SecuritySystem.state == ON)
@@ -27,13 +27,14 @@ then
       	sendBroadcastNotification("SECURITY SYSTEM: Puerta OPEN")
       }
 end
+
 rule "Puerta 1 and 2 are CLOSED"
 when
       Item Puerta1 received update CLOSED or Item Puerta2 received update CLOSED  
 then
-      if (Puerta1.state == CLOSED and Puerta2.state == CLOSED) 
+      if (Puerta1.state != OPEN && Puerta2.state != OPEN) // change to == CLOSED once door sensor updates Null on conect
       {     
-            BLEDMsgToSend.sendCommand("0S1")
+            BLEDMsgToSend.sendCommand("0S0")
       }
 end
 
