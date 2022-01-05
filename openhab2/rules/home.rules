@@ -19,12 +19,21 @@ rule "Puerta 1 or 2 is OPEN"
 when
       Item Puerta1 received update OPEN or Item Puerta2 received update OPEN  
 then
-      BLEDColor.sendCommand("0,0,0")  //LED Controller takes care of HSB to string conversiona
+      BLEDMsgToSend.sendCommand("1S1")  //String arrives in this format 1S6 = ON section 6, 0S6 = OFF section 6
       TabletDisplay.sendCommand("ON") //OFF is taken care by the tablet built-in app (sleep mode in 10 minutes)
       
       if(SecuritySystem.state == ON)
       {
       	sendBroadcastNotification("SECURITY SYSTEM: Puerta OPEN")
+      }
+end
+rule "Puerta 1 and 2 are CLOSED"
+when
+      Item Puerta1 received update CLOSED or Item Puerta2 received update CLOSED  
+then
+      if (Puerta1.state == CLOSED and Puerta2.state == CLOSED) 
+      {     
+            BLEDMsgToSend.sendCommand("0S1")
       }
 end
 
@@ -42,6 +51,53 @@ when
       Item Buzon received command OFF
 then
       //BLEDColor.sendCommand("0,0,0")
+end
+
+
+//=== SALA
+rule "AC ON"
+when
+      Item AirePower received command ON
+then
+      AireMsgToSend.sendCommand("1135XX")
+      // // AC MESSAGE FORMAT
+      // // AireMsg = [SECTION 1-2][POWER 1-0][TEMPERATURE: hex(temp-15)][FANSPEED: 0,9,2,A,4,5][SWING VERTICAL 1-0][SWING HORIZONTAL 1-0]
+      // // where SECTIONS 1 is for (power, temperature, fan) and 2 for swing(vertical and horizontal)  
+      // AireMsg[0] = '1'
+      // AireMsg[1] = '1'
+      // if (AireTemp.state - 15 > 9)
+      // {
+      //       AireMsg[2] = "ABCDEF"[AireTemp.state - 15 -10]
+      // }
+      // else
+      // {
+      //       AireMsg[2] = AireTemp.state.toString
+      // }
+      // AireMsg[3] =  "092A45"[AireFanSpeed.state] // make sure state is in number format
+      // AireMsg[4] =  "X" //Not important
+      // AireMsg[5] =  "X"
+      // AireMsgToSend.sendCommand(AireMsg)
+      // AireMsg[0] = '2'
+      // AireMsg[1] = 'X'
+      // AireMsg[2] = 'X'
+      // AireMsg[3] = 'X'
+      // AireMsg[4] =  if (AireSwingUpDown.state != ON) '0' else '1'
+      // AireMsg[5] =  if (AireSwingLeftRight.state != ON) '0' else '1'
+      // AireMsgToSend.sendCommand(AireMsg)
+end
+
+rule "AC OFF"
+when
+      Item AirePower received command OFF
+then
+      AireMsgToSend.sendCommand("10XXXX")
+end
+
+rule "AC Triggered Every Hour"
+when
+    Time cron "0 0 * ? * *"
+then
+    AirePower.sendCommand(if(AirePower.state != ON) ON else OFF) //alternate states
 end
 
 

@@ -14,20 +14,30 @@ sitemap home label="Laygond-AI"
         Switch item=Buzon
     }
 
+    Frame label="Sala"
+    {
+        Group item=Aire {
+		Switch      item=AirePower   
+        Setpoint    item=AireTemp     minValue=18 maxValue=30 step=1
+        Selection   item=AireFanSpeed mappings=[0="AUTO", 1="1", 2="2",3="3",4="4",5="5"]   
+	    Switch      item=AireSwingUpDown
+        Switch      item=AireSwingLeftRight
+        }
+    }
+
     Frame label="B-Room"
     {
-  	Group item=BLED {
-                Colorpicker item=BLEDColor
+  	    Group item=BLED {
+        Colorpicker item=BLEDColor
 		Selection   item=BLEDEffect mappings=["NONE"="NONE", "FADE"="FADE", "POLICE"="POLICE", "COLD"="COLD", "WARM"="WARM", "BREATH"="BREATH", "RAINBOW"="RAINBOW"]
 		Slider 	    item=BLEDSpeed
-        
-	}
+	    }
         Group item=AireB {
-		Switch      item=AirePower   
-                Setpoint    item=AireBTemp     minValue=18 maxValue=30 step=1
-                Selection   item=AireBFanSpeed mappings=[0="AUTO", 1="1", 2="2",3="3",4="4",5="5"]   
+		Switch      item=AireBPower   
+        Setpoint    item=AireBTemp     minValue=18 maxValue=30 step=1
+        Selection   item=AireBFanSpeed mappings=[0="AUTO", 1="1", 2="2",3="3",4="4",5="5"]   
 		Selection   item=AireBMode     mappings=["NONE"="NONE", "JET"="JET", "BEDSLEEP"="BEDSLEEP", "SAVINGS"="SAVINGS"]
-	}
+	    }
     }
 
     Frame label="Fire Safety"

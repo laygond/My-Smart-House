@@ -18,18 +18,28 @@ Switch  Plancha         "Plancha [%s]"   <wardrobe>     {channel="mqtt:topic:Cas
 Switch  Buzon  		"Buzon"		 <party> 	{channel="mqtt:topic:CasaDevice12:mail_ch" }
 
 //B LED items
-Group 	BLED	 	"B LED"		 <colorpicker>	
+Group 	BLED	 	"B LED"	         <colorpicker>	
 Color 	BLEDColor	"B LED Color" 	 <colorpicker>  (BLED) [ "Lighting" ]
-String 	BLEDColorStr 	"B LED ColorStr"		(BLED) {channel="mqtt:topic:CasaDevice8:bled_colorstr_ch"}
-Dimmer 	BLEDSpeed 	"B LED Speed"	 <time> 	(BLED) {channel="mqtt:topic:CasaDevice8:bled_speed_ch", autoupdate="false"}
-String 	BLEDEffect 	"B LED Effects"	 <rgb> 		(BLED) {channel="mqtt:topic:CasaDevice8:bled_effect_ch", autoupdate="false"}
+String 	BLEDColorStr "B LED ColorStr"               (BLED) {channel="mqtt:topic:CasaDevice8:bled_colorstr_ch"}
+Dimmer 	BLEDSpeed 	"B LED Speed"	 <time>         (BLED) {channel="mqtt:topic:CasaDevice8:bled_speed_ch", autoupdate="false"}
+String 	BLEDEffect 	"B LED Effects"	 <rgb> 	        (BLED) {channel="mqtt:topic:CasaDevice8:bled_effect_ch", autoupdate="false"}
+
+//B LED Notifier items
+String 	BLEDMsgToSend  "B LED Notifier"		{channel="mqtt:topic:CasaDevice190:bled_notifier_ch"}
 
 //Aire B items
 //TODO: String AireB "Aire [%s]" <climate>  //Through rules: update icon based on AireBPower and value (not label) through AireBTemp value. In sitemap juts make it Text. 
 Group:Switch:OR(ON,OFF) AireB "Aire"    <climate>	
-Switch  AirePower	"Power"		<climate>	(AireB)
-Number 	AireBTemp	"Temp [%.1f °C]"<temperature>	
-String 	AireBFanSpeed 	"Fan Speed" 	<fan>		
-String 	AireBMode 	"Mode"	 	<flow> 	 	  
+Switch  AireBPower    "Power"           <climate>	(AireB)
+Number 	AireBTemp     "Temp [%.1f °C]"  <temperature>	
+String 	AireBFanSpeed "Fan Speed"       <fan>		
+String 	AireBMode     "Mode"            <flow> 	 	  
 
-
+//Aire Sala items
+Group:Switch:OR(ON,OFF) Aire "Aire"    <climate>	
+Switch  AirePower          "Power"             <climate>	(Aire)
+String  AireMsgToSend      "Transforms into IR msg"    {channel="mqtt:topic:CasaDevice91:aire_ch"}
+Number 	AireTemp           "Temp [%.1f °C]"    <temperature>	
+String 	AireFanSpeed       "Fan Speed"         <fan>		
+Switch 	AireSwingUpDown    "Swing Up Down"     <smoke>
+Switch 	AireSwingLeftRight "Swing Left Right"  <flow>

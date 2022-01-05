@@ -31,6 +31,11 @@ Bridge mqtt:systemBroker:embedded-mqtt-broker [ host="192.168.1.11", secure=fals
 	Type dimmer : bled_speed_ch    "B LED Speed"  [ stateTopic="casa/b-realm/light/led/state/speed" , commandTopic="casa/b-realm/light/led" ]
 	Type string : bled_effect_ch   "B LED Effect" [ stateTopic="casa/b-realm/light/led/state/effect", commandTopic="casa/b-realm/light/led" ]
     }
+    
+    Thing mqtt:topic:CasaDevice190 "B LED Notiifier" {
+    Channels:
+    Type string : bled_notifier_ch "B LED Notiifier" [ stateTopic="casa/control/led/state" , commandTopic="casa/control/led" ]
+    }
 
     Thing mqtt:topic:CasaDevice10 "Plancha" {
     Channels:
@@ -40,6 +45,11 @@ Bridge mqtt:systemBroker:embedded-mqtt-broker [ host="192.168.1.11", secure=fals
     Thing mqtt:topic:CasaDevice111 "Tablet Display" {
     Channels:
 	Type string : tablet_display_ch "Tablet Display" [ commandTopic="casa/security/tablet/display" ]
+    }
+
+    Thing mqtt:topic:CasaDevice91 "Aire Sala" {
+    Channels:
+    Type string : aire_ch "Aire Sala" [ stateTopic="casa/control/acsala/state" , commandTopic="casa/control/acsala" ]
     }
 }
 
