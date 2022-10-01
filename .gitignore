@@ -1,6 +1,6 @@
 sample.mp4
 .ipynb_checkpoints
 .vscode
-hand_sign_commands/data
+data/
 __pycache__/
 build/
