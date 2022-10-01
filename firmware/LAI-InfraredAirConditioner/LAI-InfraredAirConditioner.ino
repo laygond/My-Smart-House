@@ -29,6 +29,7 @@
  * NOTE:
  * On a Arduino Uno/Nano with a 8-bit microcontroller, such as the ATMega328P, an int is a int16_t. 
  * On the 32-bit ESP8266 CPU, an int is int32_t.
+ * Make sure you give SPIFFS 1MB when uploading code
  * 
  * HARDWARE: 
  * - ESP8266 d1 mini
@@ -55,8 +56,8 @@
 #define ON_SWING_LEFT_RIGHT   0x8813149
 #define OFF_SWING_LEFT_RIGHT  0x881315A
 #define AC_OFF                0x88C0051
-IRsend irsend(14);          // GPIO pin 14 (D5)
-uint32_t ac_code_to_send;   // AC command's data 
+IRsend irsend(4);            // GPIO pin 4 (D2)
+uint32_t ac_code_to_send;    // AC command's data 
 
 //Web GUI Parameter Variables
 //if there are different values in config.json, they are overwritten.
@@ -202,7 +203,7 @@ void setup()
   //sets timeout until configuration portal gets turned off
   //useful to make it all retry or go to sleep
   //in seconds
-  wifiManager.setTimeout(120);
+  wifiManager.setTimeout(240); //give user 4 minutes max to enter credentials
 
   //fetches ssid and pass and tries to connect
   //if it does not connect it starts an access point with the specified name
@@ -318,7 +319,7 @@ void connect()
   
   // === OPTIONAL ===
   //Reread sensor variables and/or publish to MQTT Server before it goes into the loop() logic
-  delay(10000);
+  delay(100);
   //In my case i just want to let the server know there was a disconnection
   //so that it sends back all the event states if needed
   client.publish(String(mqtt_topic)+ "/state", "CONNECTED");  

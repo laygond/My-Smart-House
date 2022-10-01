@@ -25,6 +25,7 @@
  * NOTE:
  * On a Arduino Uno/Nano with a 8-bit microcontroller, such as the ATMega328P, an int is a int16_t. 
  * On the 32-bit ESP8266 CPU, an int is int32_t.
+ * Make sure you give SPIFFS 1MB when uploading code
  * 
  * HARDWARE: 
  * - ESP8266 d1 mini
@@ -90,7 +91,7 @@ MQTTClient client;
 //Forward Declarations 
 void connect();
 void messageReceived( String &topic, String &payload);
-
+boolean isValidNumber(String str);
 
 void setup() 
 {
